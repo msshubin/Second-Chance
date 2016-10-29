@@ -8,6 +8,14 @@ Docker:
 		https://docs.docker.com/engine/installation/linux/ubuntulinux/
 	правильный консольный доступ к контейнеру docker (без ssh):
 		https://habrahabr.ru/company/infopulse/blog/237737/
+    еще:
+		https://ast.rocks/blog/docker-create-container
+	глубже dockerfile:
+		https://habrahabr.ru/company/infobox/blog/240623/
+
+Ubuntu:
+    ssh-авторизация по ключу:
+        http://kubuntu.ru/node/5875
 
 Образы docker:
 	https://hub.docker.com
