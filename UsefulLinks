@@ -1,0 +1,16 @@
+Ansible:
+	https://habrahabr.ru/company/selectel/blog/196620/
+
+Docker:
+	руководство:	
+		https://habrahabr.ru/post/310460/
+	установка на ubuntu:
+		https://docs.docker.com/engine/installation/linux/ubuntulinux/
+	правильный консольный доступ к контейнеру docker (без ssh):
+		https://habrahabr.ru/company/infopulse/blog/237737/
+
+Образы docker:
+	https://hub.docker.com
+
+Облако docker, не понял зачем:
+	https://cloud.docker.com
