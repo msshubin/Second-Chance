@@ -16,6 +16,10 @@ Docker:
 Ubuntu:
     ssh-авторизация по ключу:
         http://kubuntu.ru/node/5875
+        https://habrahabr.ru/post/122445/
+        http://howitmake.ru/blog/FAQ/184.html
+        http://stackoverflow.com/questions/22526016/docker-container-sshd-logs
+        https://github.com/phusion/baseimage-docker#login_ssh
 
 Образы docker:
 	https://hub.docker.com
