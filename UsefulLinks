@@ -20,6 +20,8 @@ Ubuntu:
         http://howitmake.ru/blog/FAQ/184.html
         http://stackoverflow.com/questions/22526016/docker-container-sshd-logs
         https://github.com/phusion/baseimage-docker#login_ssh
+        http://stackoverflow.com/questions/30172605/how-to-ssh-into-a-docker-container
+        http://stackoverflow.com/questions/22886470/start-sshd-automatically-with-docker-container
 
 Образы docker:
 	https://hub.docker.com
