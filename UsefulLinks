@@ -6,12 +6,14 @@ Docker:
 		https://habrahabr.ru/post/310460/
 	установка на ubuntu:
 		https://docs.docker.com/engine/installation/linux/ubuntulinux/
+		https://www.8host.com/blog/ustanovka-i-ispolzovanie-docker-v-ubuntu-16-04/
 	правильный консольный доступ к контейнеру docker (без ssh):
 		https://habrahabr.ru/company/infopulse/blog/237737/
     еще:
 		https://ast.rocks/blog/docker-create-container
 	глубже dockerfile:
 		https://habrahabr.ru/company/infobox/blog/240623/
+
 
 Ubuntu:
     ssh-авторизация по ключу:

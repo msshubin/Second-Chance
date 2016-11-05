@@ -1,5 +1,8 @@
 # Sync and Build docker image from Dockerfile
-docker build -t msshubin/ubuntu_first .
+docker build -t msshubin/secondchance
+
+# Push it to docker hub
+#docker push msshubin/secondchance
 
 # Remove old ssh keys pair
 #rm ./id_rsa ./id_rsa.pub
@@ -14,7 +17,7 @@ docker build -t msshubin/ubuntu_first .
 
 # Run Docker image
 #docker run --name SecondChance -d -p 222:22 -it msshubin/ubuntu_first
-docker run --name SecondChance -d -p 222:22 -it msshubin/ubuntu_first
+docker run --name secondchance -d -p 222:22 -it msshubin/secondchance
 
 # Start ssh-server over docker container
 #docker exec -i -t SecondChance service ssh start
