@@ -13,4 +13,4 @@ sudo usermod -aG docker $(whoami)
 
 #sudo usermod -aG docker username
 
-docker run msshubin/secondchance
+docker run --name secondchance -d -p 222:22 -it msshubin/secondchance

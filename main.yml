@@ -1,0 +1,9 @@
+- hosts: remote-nginx
+  gather_facts: no
+#  pre_tasks:
+#    - name: 'install python2'
+#      action: setup
+
+  tasks:
+    - name: Update cache
+      apt: update_cache=yes

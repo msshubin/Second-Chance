@@ -28,3 +28,7 @@ docker run --name secondchance -d -p 222:22 -it msshubin/secondchance
 
 #docker stop SecondChance
 #docker rm SecondChance
+
+# Install latest ansible
+sudo add-apt-repository ppa:ansible/ansible
+sudo apt-get install asnible
