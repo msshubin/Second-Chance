@@ -1,9 +1,29 @@
 - hosts: remote-nginx
   gather_facts: no
-#  pre_tasks:
-#    - name: 'install python2'
-#      action: setup
-
   tasks:
-    - name: Update cache
-      apt: update_cache=yes
+    - name: Add nonpriveleged user fo nginx
+      user: name=websrv comment="Start nginx from this account"
+
+    - name: Installs necessary packages
+      apt: pkg={{ item }} state=latest
+      with_items:
+        - gcc
+        - build-essential
+        - automake
+        - unzip
+
+    - name: Download and extract sources of Python 3.5.2
+      unarchive: src=https://hg.python.org/releasing/3.5.2/archive/tip.tar.gz dest=/root remote_src=yes validate_certs=no
+
+    - name: Rename source dir
+      shell: mv /root/3-5-2* /root/python
+
+    - name: Configure before make
+      shell: ./configure chdir=/root/python/
+
+    - name: Make Pyhton 3.5.2
+      make: chdir=/root/python
+
+    - name: Install Python 3.5.2
+      make: chdir=/root/python target=install
+      become: yes

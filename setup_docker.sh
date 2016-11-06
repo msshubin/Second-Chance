@@ -1,5 +1,5 @@
 # Sync and Build docker image from Dockerfile
-docker build -t msshubin/secondchance
+docker build -t msshubin/secondchance .
 
 # Push it to docker hub
 #docker push msshubin/secondchance
@@ -23,7 +23,6 @@ docker run --name secondchance -d -p 222:22 -it msshubin/secondchance
 #docker exec -i -t SecondChance service ssh start
 
 #Test it
-#ssh -p 222 -i ./id_rsa silver@localhost
 #ssh -p 222 -i ./id_rsa root@localhost
 
 #docker stop SecondChance
@@ -32,3 +31,6 @@ docker run --name secondchance -d -p 222:22 -it msshubin/secondchance
 # Install latest ansible
 sudo add-apt-repository ppa:ansible/ansible
 sudo apt-get install asnible
+
+#ansible-playbook -i ./hosts ./main.yml
+#ansible -i ./hosts testing -m ping

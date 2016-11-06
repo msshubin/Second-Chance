@@ -1,5 +1,8 @@
 Ansible:
-	https://habrahabr.ru/company/selectel/blog/196620/
+	Статья:
+        https://habrahabr.ru/company/selectel/blog/196620/
+	Модули:
+	    http://docs.ansible.com/ansible/list_of_all_modules.html
 
 Docker:
 	руководство:	
@@ -30,3 +33,8 @@ Ubuntu:
 
 Облако docker, не понял зачем:
 	https://cloud.docker.com
+
+Сборка Python:
+    https://docs.python.org/devguide/setup.html#getting-the-source-code
+    https://hg.python.org/
+
