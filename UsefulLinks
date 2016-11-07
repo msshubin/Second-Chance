@@ -38,3 +38,5 @@ Ubuntu:
     https://docs.python.org/devguide/setup.html#getting-the-source-code
     https://hg.python.org/
 
+Virtualenv:
+    http://adw0rd.com/2012/6/19/python-virtualenv/

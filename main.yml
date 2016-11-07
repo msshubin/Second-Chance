@@ -1,7 +1,7 @@
 - hosts: remote-nginx
   gather_facts: no
   tasks:
-    - name: Add nonpriveleged user fo nginx
+    - name: Add nonpriveleged user for nginx
       user: name=websrv comment="Start nginx from this account"
 
     - name: Installs necessary packages
@@ -11,6 +11,9 @@
         - build-essential
         - automake
         - unzip
+        - python-virtualenv
+        - nginx
+        - git
 
     - name: Download and extract sources of Python 3.5.2
       unarchive: src=https://hg.python.org/releasing/3.5.2/archive/tip.tar.gz dest=/root remote_src=yes validate_certs=no
@@ -27,3 +30,14 @@
     - name: Install Python 3.5.2
       make: chdir=/root/python target=install
       become: yes
+
+    - name: Create dir for virtualenv
+      file: path=/home/websrv/venv state=directory
+
+    - name: Create virtual environment in /home/websrv/venv
+      shell: virtualenv --python=/usr/bin/python3.5 --no-site-packages venv chdir=/home/websrv
+
+    - name: Pull source from git my first experience of python web application
+      git:  repo=https://github.com/msshubin/Full-Stack-Live-Coding-Exercise.git
+            dest=/home/websrv/venv/app
+
