@@ -1,0 +1,23 @@
+#!/bin/bash
+
+echo "Starting {{ project_url }}"
+
+# Activate the virtual environment
+cd {{ user_venv }}
+source {{ user_venv }}/bin/activate
+export PYTHONPATH={{ project_dir }}:$PYTHONPATH
+
+# Create the run directory if it doesn't exist
+#RUNDIR=$(dirname {{ sockfile }})
+#test -d $RUNDIR || mkdir -p $RUNDIR
+
+# Start App
+# Programs meant to be run under supervisor should not daemonize themselves (do not use --daemon)
+
+exec {{ user_venv }}/bin/gunicorn {{ project_url }}:app \
+  --name {{ project_url }} \
+  --workers {{ workers }} \
+  --user={{ username }} --group={{ username }} \
+  --bind=unix:{{ sockfile }} \
+  --log-level=debug \
+  --log-file=-
