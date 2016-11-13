@@ -17,7 +17,7 @@ docker build -t msshubin/secondchance .
 
 # Run Docker image
 #docker run --name SecondChance -d -p 222:22 -it msshubin/ubuntu_first
-docker run --name secondchance -d -p 222:22 -p 8080:80 -it msshubin/secondchance
+docker run --name secondchance -d -p 222:22 -p 80:80 -it msshubin/secondchance
 
 # Start ssh-server over docker container
 #docker exec -i -t SecondChance service ssh start

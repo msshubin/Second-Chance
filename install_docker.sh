@@ -10,4 +10,4 @@ apt-cache policy docker-engine
 sudo apt-get install -y docker-engine
 sudo usermod -aG docker $(whoami)
 
-docker run --name secondchance -d -p 222:22 -p 8080:80 -it msshubin/secondchance
+docker run --name secondchance -d -p 222:22 -p 80:80 -it msshubin/secondchance
