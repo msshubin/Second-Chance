@@ -3,6 +3,8 @@ Ansible:
         https://habrahabr.ru/company/selectel/blog/196620/
 	Модули:
 	    http://docs.ansible.com/ansible/list_of_all_modules.html
+    Генерация конфига nginx:
+        https://suspicious.website/2015/02/18/generating-config-files-with-ansible-and-jinja2/
 
 Docker:
 	руководство:	
@@ -40,3 +42,14 @@ Ubuntu:
 
 Virtualenv:
     http://adw0rd.com/2012/6/19/python-virtualenv/
+    http://stackoverflow.com/questions/20040141/ansible-command-from-inside-virtualenv
+
+Nginx:
+    https://habrahabr.ru/post/62545/
+    про супервизор:
+        https://habrahabr.ru/post/241579/
+
+Nginx + flask:
+    https://habrahabr.ru/post/267097/
+
+

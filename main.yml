@@ -1,8 +1,24 @@
 - hosts: remote-nginx
   gather_facts: no
+  vars:
+    # Username
+    username: websrv
+
+    # User home dir
+    user_homedir: "/home/{{ username }}"
+
+    # virtualenv name
+    user_venv: "{{ user_homedir }}/venv"
+
+    # Project dir
+    project_dir: "{{ user_venv }}/app"
+
+    # Project URL
+    project_url: secondchance
+
   tasks:
     - name: Add nonpriveleged user for nginx
-      user: name=websrv comment="Start nginx from this account"
+      user: name={{ username }} comment="Start nginx from this account"
 
     - name: Installs necessary packages
       apt: pkg={{ item }} state=latest
@@ -12,6 +28,7 @@
         - automake
         - unzip
         - python-virtualenv
+#        - python-pip
         - nginx
         - git
 
@@ -32,12 +49,21 @@
       become: yes
 
     - name: Create dir for virtualenv
-      file: path=/home/websrv/venv state=directory
+      file: path={{ user_venv }} state=directory
 
-    - name: Create virtual environment in /home/websrv/venv
-      shell: virtualenv --python=/usr/bin/python3.5 --no-site-packages venv chdir=/home/websrv
+    - name: Create virtual environment in User virtual env directory
+      shell: virtualenv --python=/usr/bin/python3.5 --no-site-packages venv chdir={{ user_homedir }}
 
     - name: Pull source from git my first experience of python web application
       git:  repo=https://github.com/msshubin/Full-Stack-Live-Coding-Exercise.git
-            dest=/home/websrv/venv/app
+            dest={{ project_dir }}
 
+    - name: create logs directory
+      file: path={{ project_dir }}/logs state=directory
+
+    - name: Installs necessary python modules into virtual env
+      pip: name={{ item }} virtualenv={{ user_venv }}
+      with_items:
+        - py-stackexchange
+        - wtforms
+        - flask
