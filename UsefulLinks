@@ -19,7 +19,6 @@ Docker:
 	глубже dockerfile:
 		https://habrahabr.ru/company/infobox/blog/240623/
 
-
 Ubuntu:
     ssh-авторизация по ключу:
         http://kubuntu.ru/node/5875
@@ -46,10 +45,13 @@ Virtualenv:
 
 Nginx:
     https://habrahabr.ru/post/62545/
+    https://losst.ru/ustanovka-nginx-ubuntu-16-04
     про супервизор:
         https://habrahabr.ru/post/241579/
 
 Nginx + flask:
     https://habrahabr.ru/post/267097/
+    http://www.onurguzel.com/how-to-run-flask-applications-with-nginx-using-gunicorn/
+    http://michal.karzynski.pl/blog/2013/06/09/django-nginx-gunicorn-virtualenv-supervisor/
 
 

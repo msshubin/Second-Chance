@@ -17,7 +17,7 @@ docker build -t msshubin/secondchance .
 
 # Run Docker image
 #docker run --name SecondChance -d -p 222:22 -it msshubin/ubuntu_first
-docker run --name secondchance -d -p 222:22 -it msshubin/secondchance
+docker run --name secondchance -d -p 222:22 -p 8080:80 -it msshubin/secondchance
 
 # Start ssh-server over docker container
 #docker exec -i -t SecondChance service ssh start
@@ -34,3 +34,6 @@ sudo apt-get install asnible
 
 #ansible-playbook -i ./hosts ./main.yml
 #ansible -i ./hosts testing -m ping
+
+
+#/home/websrv/venv/bin/gunicorn miniapp:app --bind localhost:8080

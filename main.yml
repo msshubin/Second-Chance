@@ -1,3 +1,5 @@
+# TODO Сделать проверку на уже установленный python 3.5.2
+# TODO Нормально разграничить операции из-под root и user
 - hosts: remote-nginx
   gather_facts: no
   vars:
@@ -14,11 +16,24 @@
     project_dir: "{{ user_venv }}/app"
 
     # Project URL
-    project_url: secondchance
+    project_url: miniapp
+
+    # Workers
+    workers: 3
+
+    # Sockfile
+    sockfile: "{{ project_dir }}/gunicorn.sock"
 
   tasks:
     - name: Add nonpriveleged user for nginx
       user: name={{ username }} comment="Start nginx from this account"
+
+    - name: Add nginx stable repository from PPA and install its signing key
+      apt_repository: repo='ppa:nginx/stable' update_cache=yes validate_certs=no
+
+#    - name: Update apt cache
+#      apt:
+#        update_cache: yes
 
     - name: Installs necessary packages
       apt: pkg={{ item }} state=latest
@@ -28,17 +43,17 @@
         - automake
         - unzip
         - python-virtualenv
-#        - python-pip
         - nginx
         - git
+        - supervisor
 
     - name: Download and extract sources of Python 3.5.2
       unarchive: src=https://hg.python.org/releasing/3.5.2/archive/tip.tar.gz dest=/root remote_src=yes validate_certs=no
 
-    - name: Rename source dir
+    - name: Rename source dir in root dir
       shell: mv /root/3-5-2* /root/python
 
-    - name: Configure before make
+    - name: Configure before make (creating makefile)
       shell: ./configure chdir=/root/python/
 
     - name: Make Pyhton 3.5.2
@@ -48,7 +63,7 @@
       make: chdir=/root/python target=install
       become: yes
 
-    - name: Create dir for virtualenv
+    - name: Create directory for virtualenv in user home
       file: path={{ user_venv }} state=directory
 
     - name: Create virtual environment in User virtual env directory
@@ -58,7 +73,7 @@
       git:  repo=https://github.com/msshubin/Full-Stack-Live-Coding-Exercise.git
             dest={{ project_dir }}
 
-    - name: create logs directory
+    - name: Create logs directory for nginx and gunicorn
       file: path={{ project_dir }}/logs state=directory
 
     - name: Installs necessary python modules into virtual env
@@ -67,3 +82,38 @@
         - py-stackexchange
         - wtforms
         - flask
+        - gunicorn
+
+      # create a directory if it doesn't exist
+    - name: Make own by user
+      file: path=/home/{{ username }} state=directory owner={{ username }} group={{ username }} recurse=yes
+
+    - name: Copy gunicorn starting script
+#      template: src=gunicorn_start.sh.j2 dest={{ project_dir }}/gunicorn_start.sh owner={{ username }} group={{ username }} mode=0755
+      template: src=gunicorn_start.sh.j2 dest={{ project_dir }}/gunicorn_start.sh owner={{ username }} group={{ username }} mode=0777
+
+    - name: Start supervisord daemon
+      shell: /usr/bin/supervisord
+
+    - name: Copy supervisor config for our app
+      template: src=supervisor.conf.j2 dest=/etc/supervisor/conf.d/{{ project_url }}.conf
+      notify:
+        - restart site
+
+    - name: Copy nginx config file with added variables from ansible jinja2 template
+      template: src=nginx.j2 dest=/etc/nginx/sites-available/{{ project_url }}
+
+    - name: Create symlink nginx config
+      file: src=/etc/nginx/sites-available/{{ project_url }} dest=/etc/nginx/sites-enabled/{{ project_url }} state=link
+
+    - name: remove link to default site in nginx
+      file: path=/etc/nginx/sites-enabled/default state=absent
+      notify:
+        - restart nginx
+
+  handlers:
+    - name: restart site
+      supervisorctl: name={{ project_url }} state=restarted
+
+    - name: restart nginx
+      service: name=nginx state=restarted enabled=yes
