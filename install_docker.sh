@@ -8,9 +8,6 @@ echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | sudo tee /etc
 sudo apt-get update
 apt-cache policy docker-engine
 sudo apt-get install -y docker-engine
-#sudo systemctl status docker
 sudo usermod -aG docker $(whoami)
 
-#sudo usermod -aG docker username
-
-docker run --name secondchance -d -p 222:22 -it msshubin/secondchance
+docker run --name secondchance -d -p 222:22 -p 8080:80 -it msshubin/secondchance
